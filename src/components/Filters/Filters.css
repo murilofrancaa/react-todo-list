@@ -1,0 +1,23 @@
+.content-task__actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 20px 24px;
+  height: 50px;
+  border-top: 1px solid #e3e4f1;
+}
+
+.content-task__actions a {
+  font-size: 14px;
+  font-weight: 400;
+
+  text-decoration: none;
+
+  color: #9495a5;
+}
+
+.content-task__actions div {
+  display: flex;
+  gap: 8px;
+}

@@ -3,15 +3,23 @@ import "./App.css";
 import type { TaskType } from "./types/TaskType";
 import { v4 as uuidv4 } from "uuid";
 import { useLocalStorage } from "usehooks-ts";
-import Empty from "./assets/empty.svg";
+import { Empty } from "./components/Empty/Empty";
+import { Task } from "./components/Task/Task";
+import { Filters } from "./components/Filters/Filters";
+import type { FilterType } from "./types/FilterType";
 
 function App() {
   const [input, setInput] = useState("");
-  const [filter, setFilter] = useState<"all" | "done" | "pending">("all");
+  const [filter, setFilter] = useState<FilterType>("all");
   const [tasks, setTasks] = useLocalStorage<TaskType[]>("tasks-list", []);
- 
 
-  const pendingTasksQtd = tasks.filter((task) => !task.done).length;
+  function handleSetFilter(newFilter: FilterType) {
+    setFilter(newFilter);
+  }
+
+  function handleSetTasks(newTasks: TaskType[]) {
+    setTasks(newTasks);
+  }
 
   function handleKeyDown(event: React.KeyboardEvent<HTMLInputElement>) {
     if (input.length && event.key === "Enter") {
@@ -27,27 +35,20 @@ function App() {
     );
   }
 
-
-  function filteredTasks(){
+  function filteredTasks() {
     switch (filter) {
       case "all":
         return tasks;
-        
+
       case "done":
         return tasks.filter((task) => task.done);
-      
 
       case "pending":
-        return tasks.filter((task) => !task.done)
-    
+        return tasks.filter((task) => !task.done);
+
       default:
         return tasks;
     }
-  }
-
-  function handleUncheckAllCompletedTasks(){
-
-    setTasks((prevState) => prevState.map((task) => (task.done ? {...task, done: false} : task)))
   }
 
   return (
@@ -67,42 +68,17 @@ function App() {
       <ul className="content-tasks">
         <div>
           {filteredTasks().map((t) => (
-            <li
-              className={`task-item ${t.done ? "task-item__done" : ""}`}
-              key={t.id}
-            >
-              <input
-                type="checkbox"
-                checked={t.done}
-                onChange={() => handleTaskToggle(t.id)}
-              />
-              {t.title}
-            </li>
+            <Task task={t} handleTaskToggle={handleTaskToggle} />
           ))}
 
-          {!filteredTasks().length && (
-            <div className="contaiiner-empty">
-              <img src={Empty} alt="empty"></img>
-              <h3>Nenhuma tarefa!</h3>
-            </div>
-          )}
+          {!filteredTasks().length && <Empty />}
         </div>
 
-        <li className="content-task__actions">
-          <div>
-            <a href="#">{pendingTasksQtd} items restantes</a>
-          </div>
-
-          <div>
-            <a href="#" onClick={() => setFilter("all")}>Todas</a>
-            <a href="#" onClick={() => setFilter("pending")}>Ativas</a>
-            <a href="#" onClick={() => setFilter("done")}>Completadas</a>
-          </div>
-
-          <div>
-            <a href="#" onClick={handleUncheckAllCompletedTasks}>Limpar Completadas</a>
-          </div>
-        </li>
+        <Filters
+          handleSetTasks={handleSetTasks}
+          tasks={tasks}
+          handleSetFilter={handleSetFilter}
+        />
       </ul>
     </div>
   );
