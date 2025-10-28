@@ -1,9 +1,9 @@
-#📝🗂️ To-Do List - React + TypeScript
+# 📝🗂️ To-Do List - React + TypeScript
 Uma aplicação de lista de tarefas feita em **React + TypeScript**, usando **usehooks-ts** para armazenar tarefas no **localStorage**. 💻⚡
 
 ---
 
-##✨ Sobre o Projeto
+## ✨ Sobre o Projeto
 Feito como parte do curso *React e NextJS do Zero ao Profissional* (Udemy).  
 - Criado com **Vite + TypeScript**  
 - Geração de IDs únicos com **uuid**  
@@ -12,7 +12,7 @@ Feito como parte do curso *React e NextJS do Zero ao Profissional* (Udemy).
 
 ---
 
-##💡 Funcionalidades
+## 💡 Funcionalidades
 - ✅ Criar tarefas  
 - ✔️ Marcar tarefas como concluídas  
 - 🗑️ Limpar tarefas completadas  
@@ -20,7 +20,7 @@ Feito como parte do curso *React e NextJS do Zero ao Profissional* (Udemy).
 
 ---
 
-##⚙️ Tecnologias e Ferramentas 
+## ⚙️ Tecnologias e Ferramentas 
 - 🖥️ React + TypeScript  
 - ⚡ Vite  
 - 🧩 uuid  
@@ -46,7 +46,7 @@ npm install
 npm run dev
 ```
 
-##👨‍💻 Autor 
+## 👨‍💻 Autor 
 Murilo França de Sousa  
 📱 GitHub: [murilo2201](https://github.com/murilo2201)  
 📧 Email: murilofs.franca@gmail.com
